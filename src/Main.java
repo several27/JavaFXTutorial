@@ -27,7 +27,10 @@ public class Main extends Application
 		this.primaryStage.setTitle("Title");
 
 		button = new Button("Click me");
-		button.setOnAction(e -> AlertBox.display("Title of the alertBox", "Message of the alert box"));
+		button.setOnAction(e -> {
+			boolean result = ConfirmBox.display("Title", "Are u sure ?");
+			System.out.println(result);
+		});
 
 		StackPane stackPane = new StackPane();
 		stackPane.getChildren().add(button);
