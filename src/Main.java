@@ -8,10 +8,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Stack;
+
 public class Main extends Application
 {
 	Stage primaryStage;
-	Scene scene1, scene2;
+	Button button;
 
 	public static void main(String[] args)
 	{
@@ -22,26 +24,16 @@ public class Main extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		this.primaryStage = primaryStage;
+		this.primaryStage.setTitle("Title");
 
-		Label label1 = new Label("Welcome to the first screen!");
-		Button button1 = new Button("Go to scene 2");
-		button1.setOnAction(e -> primaryStage.setScene(scene2));
+		button = new Button("Click me");
+		button.setOnAction(e -> AlertBox.display("Title of the alertBox", "Message of the alert box"));
 
-		// Layout 1
-		VBox layout1 = new VBox(20);
-		layout1.getChildren().addAll(label1, button1);
-		scene1 = new Scene(layout1, 200, 200);
+		StackPane stackPane = new StackPane();
+		stackPane.getChildren().add(button);
 
-		Button button2 = new Button("Go back to scene 1");
-		button2.setOnAction(e -> primaryStage.setScene(scene1));
-
-		// Layout 2
-		StackPane layout2 = new StackPane();
-		layout2.getChildren().add(button2);
-		scene2 = new Scene(layout2, 600, 300);
-
-		primaryStage.setScene(scene1);
-		primaryStage.setTitle("Title here");
-		primaryStage.show();
+		Scene scene = new Scene(stackPane, 300, 250);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
 	}
 }
