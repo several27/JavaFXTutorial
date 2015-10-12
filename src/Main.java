@@ -3,12 +3,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application
 {
-	Button button;
+	Stage primaryStage;
+	Scene scene1, scene2;
 
 	public static void main(String[] args)
 	{
@@ -18,35 +21,27 @@ public class Main extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		primaryStage.setTitle("Title of the Window");
+		this.primaryStage = primaryStage;
 
-		button = new Button();
-		button.setText("Click me");
-//		button.setOnAction(new EventHandler<ActionEvent>()
-//		{
-//			@Override
-//			public void handle(ActionEvent event)
-//			{
-//				System.out.println("I am in this thing :(");
-//			}
-//		});
+		Label label1 = new Label("Welcome to the first screen!");
+		Button button1 = new Button("Go to scene 2");
+		button1.setOnAction(e -> primaryStage.setScene(scene2));
 
-//		Simplified:
-//		button.setOnAction((ActionEvent event) -> {
-//			System.out.println("I am in this thing :(");
-//		});
+		// Layout 1
+		VBox layout1 = new VBox(20);
+		layout1.getChildren().addAll(label1, button1);
+		scene1 = new Scene(layout1, 200, 200);
 
-//		Even more simplified:
-		button.setOnAction(
-				(ActionEvent event) -> System.out.println("I am in this thing :(")
-		);
+		Button button2 = new Button("Go back to scene 1");
+		button2.setOnAction(e -> primaryStage.setScene(scene1));
 
-		StackPane layout = new StackPane();
-		layout.getChildren().add(button);
+		// Layout 2
+		StackPane layout2 = new StackPane();
+		layout2.getChildren().add(button2);
+		scene2 = new Scene(layout2, 600, 300);
 
-		Scene scene = new Scene(layout, 300, 250);
-
-		primaryStage.setScene(scene);
+		primaryStage.setScene(scene1);
+		primaryStage.setTitle("Title here");
 		primaryStage.show();
 	}
 }
