@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -14,7 +16,6 @@ import java.util.Stack;
 public class Main extends Application
 {
 	Stage primaryStage;
-	Button button;
 
 	public static void main(String[] args)
 	{
@@ -27,28 +28,24 @@ public class Main extends Application
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Title");
 
-		this.primaryStage.setOnCloseRequest(e -> {
-			e.consume(); // i'm going to care about closing the program
-			closeProgram();
-		});
+		HBox topMenu = new HBox();
+		Button buttonFile = new Button("File");
+		Button buttonEdit = new Button("Edit");
+		Button buttonView = new Button("View");
+		topMenu.getChildren().addAll(buttonFile, buttonEdit, buttonView);
 
-		button = new Button("Cloes window");
-		button.setOnAction(e -> closeProgram());
+		VBox leftMenu = new VBox();
+		Button buttonA = new Button("A");
+		Button buttonB = new Button("B");
+		Button buttonC = new Button("C");
+		leftMenu.getChildren().addAll(buttonA, buttonB, buttonC);
 
-		StackPane stackPane = new StackPane();
-		stackPane.getChildren().add(button);
+		BorderPane borderPane = new BorderPane();
+		borderPane.setTop(topMenu);
+		borderPane.setLeft(leftMenu);
 
-		Scene scene = new Scene(stackPane, 300, 250);
+		Scene scene = new Scene(borderPane, 300, 250);
 		this.primaryStage.setScene(scene);
 		this.primaryStage.show();
-	}
-
-	public void closeProgram()
-	{
-		System.out.println("Before program close");
-
-		Boolean answer = ConfirmBox.display("Closing program", "Are you sure, that you want to close this window?");
-		if (answer)
-			primaryStage.close();
 	}
 }
